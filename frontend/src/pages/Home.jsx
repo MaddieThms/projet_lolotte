@@ -1,36 +1,26 @@
-import Counter from "../components/Counter";
-import logo from "../assets/logo.svg";
+import React from "react";
+import homeCliff from "../assets/home-falaise.png";
+import homeIndoor from "../assets/pierreIndoor.png";
 
-export default function Home() {
+function Home() {
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
-
-      <Counter />
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+    <div className="flex flex-col md:flex-row justify-around md:items-center content-center">
+      <img src={homeCliff} alt="" className="my-20 hidden md:block" />
+      <div className="md:w-1/2 mt-6 mx-6 md:mt-0 md:mx-0">
+        <h1 className="text-4xl md:text-6xl">
+          La grimpe en <span className="text-main-green">stats</span>
+        </h1>
+        <p className="mt-10 md:w-3/4">
+          Cras mattis quam tincidunt, feugiat nibh ultrices, aliquet enim. Cras
+          velit elit, dignissim vel justo quis, vestibulum vehicula quam. Cras
+          et consequat mauris. Integer ac vehicula mi.
+        </p>
+      </div>
+      <div className="w-max-screen overflow-x-hidden  ">
+        <img src={homeIndoor} alt="" className="my-10 block md:hidden ml-14" />
+      </div>
+    </div>
   );
 }
+
+export default Home;
