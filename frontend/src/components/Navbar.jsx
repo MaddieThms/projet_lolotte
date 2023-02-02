@@ -1,11 +1,30 @@
 import { Tooltip } from "@material-tailwind/react";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import menu from "../assets/menu.svg";
 import closeMenu from "../assets/cross.svg";
+import { useCurrentAdminContext } from "../context/AdminContext";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoutIsConfirm, setLogoutIsConfirm] = useState(false);
+  const { token, setAdmin } = useCurrentAdminContext();
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    setLogoutIsConfirm(true);
+  };
+
+  useEffect(() => {
+    if (logoutIsConfirm === true) {
+      localStorage.removeItem("token");
+      navigate("/");
+      setAdmin({});
+    } else {
+      setLogoutIsConfirm(false);
+    }
+  }, [logoutIsConfirm]);
 
   return (
     <div className="flex justify-between px-6 md:px-14 py-4">
@@ -94,19 +113,28 @@ function Navbar() {
               <span className="text-main-green">.</span>compétitions
             </li>
           </Tooltip>
-          <Tooltip
-            content="à venir"
-            placement="bottom-end"
-            animate={{
-              mount: { scale: 1, y: 0 },
-              unmount: { scale: 0, y: 25 },
-            }}
-            className="text-main-green"
-          >
-            <li className="text-main-grey ml-6 hidden md:block text-2xl">
-              <span className="text-main-green">.</span>les croix
-            </li>
-          </Tooltip>
+          <div>
+            <Tooltip
+              content="à venir"
+              placement="bottom-end"
+              animate={{
+                mount: { scale: 1, y: 0 },
+                unmount: { scale: 0, y: 25 },
+              }}
+              className="text-main-green"
+            >
+              <li className="text-main-grey ml-6 hidden md:block text-2xl">
+                <span className="text-main-green">.</span>les croix
+              </li>
+            </Tooltip>
+            {token ? (
+              <button type="button" onClick={() => handleLogOut()}>
+                Se déconnecter
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
         </ul>
       </div>
     </div>

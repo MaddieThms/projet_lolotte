@@ -1,25 +1,44 @@
 import React, { useState } from "react";
-import adamAvatar from "../assets/climbers/avatar_adam_ondra.svg";
+import { useCurrentAdminContext } from "../context/AdminContext";
+import EditClimber from "./EditClimber";
+import ClimberDetails from "./ClimberDetails";
 
-function Climber({ climber }) {
+function Climber({ climber, setClimbers }) {
   const [openClimbersDetails, setOpenClimbersDetails] = useState(false);
+  const [editClimbersDetails, setEditClimbersDetails] = useState(false);
+  const { token } = useCurrentAdminContext();
+
   return (
     <div>
       <li className="flex flex-col items-center mt-6">
-        <button
-          type="button"
-          onClick={() => setOpenClimbersDetails(!openClimbersDetails)}
-        >
-          <img
-            src={climber.picture}
-            alt={`${climber.firstname} ${climber.lastname}`}
-            className="rounded-full w-[170px] h-[170px] object-cover"
-          />
-          <h3 className="my-4">
-            {climber.firstname} {climber.lastname}
-          </h3>
-        </button>
-        {openClimbersDetails ? (
+        {token ? (
+          <div>
+            <img
+              src={climber.picture}
+              alt={`${climber.firstname} ${climber.lastname}`}
+              className="rounded-full w-[170px] h-[170px] object-cover"
+            />
+            <h3 className="my-4">
+              {climber.firstname} {climber.lastname}
+            </h3>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setOpenClimbersDetails(!openClimbersDetails)}
+          >
+            <img
+              src={climber.picture}
+              alt={`${climber.firstname} ${climber.lastname}`}
+              className="rounded-full w-[170px] h-[170px] object-cover"
+            />
+            <h3 className="my-4">
+              {climber.firstname} {climber.lastname}
+            </h3>
+          </button>
+        )}
+
+        {openClimbersDetails && !token ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -37,30 +56,30 @@ function Climber({ climber }) {
         ) : (
           <div className="w-16 border-b border-main-green mb-6" />
         )}
-      </li>
-      {openClimbersDetails ? (
-        <div className="w-max p-20 mx-20 mb-6 border-2 border-main-green bg-white rounded-lg flex flex-row">
-          {climber.avatar ? (
-            <img
-              src={adamAvatar}
-              alt={`${climber.firstname} ${climber.lastname}`}
-              className=" w-[170px]"
-            />
-          ) : (
-            <img
-              src={climber.picture}
-              alt={`${climber.firstname} ${climber.lastname}`}
-              className="rounded-full w-[170px] h-[170px] object-cover"
-            />
-          )}
-          <div className="flex flex-col ml-40">
-            <h2>
-              {climber.firstname} {climber.lastname}
-            </h2>
-            <p className="text-main-green">{climber.country}</p>
-            <p>{climber.age}</p>
+        {token ? (
+          <div className="flex flex-col">
+            <button
+              type="button"
+              className="text-main-green"
+              onClick={() => setEditClimbersDetails(!editClimbersDetails)}
+            >
+              Editer
+            </button>
+            <button type="button" className="text-red-600">
+              Supprimer
+            </button>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
+      </li>
+      {openClimbersDetails && !token ? (
+        <ClimberDetails climber={climber} />
+      ) : (
+        ""
+      )}
+      {editClimbersDetails && token ? (
+        <EditClimber climber={climber} setClimbers={setClimbers} />
       ) : (
         ""
       )}

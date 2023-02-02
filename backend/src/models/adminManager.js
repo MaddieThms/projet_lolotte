@@ -5,7 +5,7 @@ class AdminManager extends AbstractManager {
     super({ table: "administrator" });
   }
 
-  selectEmail(email) {
+  findByEmailWithPassword(email) {
     return this.connection.query(
       `select * from ${this.table} where email = ?`,
       [email]

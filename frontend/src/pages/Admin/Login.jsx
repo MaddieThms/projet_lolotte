@@ -1,56 +1,54 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 import { useCurrentAdminContext } from "../../context/AdminContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setAdmin } = useCurrentAdminContext({});
-  const notify = () =>
-    toast.error(
-      "Vous n'êtes pas administrateur ou vous avez mal renseigné vos identifiants"
-    );
-  const sendConnexion = () => {
+  const { setAdmin, setToken } = useCurrentAdminContext();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleConnexion = (e) => {
+    e.preventDefault();
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    /* It's an object that will be sent in the body of request */
-    const raw = JSON.stringify({
+
+    const body = JSON.stringify({
       email,
       password,
     });
-    const navigate = useNavigate();
 
-    fetch(`http://localhost:5000/login`, {
-      method: "POST",
-      redirect: "follow",
-      body: raw,
-      headers: myHeaders,
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.token) {
+    const requestOptions = { method: "POST", body, headers: myHeaders };
+
+    if (email && password) {
+      fetch(`http://localhost:5000/login`, requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
           setAdmin(result.admin);
-          console.warn(result.admin);
-          localStorage.setItem("token", result.token);
+          setToken(result.token);
           navigate("/edit/grimpeurs");
-        } else {
-          notify();
-        }
-      })
-      .catch((error) => console.warn(error));
+        })
+        .catch((error) => console.warn(error));
+    } else {
+      setErrorMessage("Merci de rentrer un email et un mot de passe");
+    }
   };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Connexion admin
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              className="space-y-4 md:space-y-6"
+              action="#"
+              onSubmit={handleConnexion}
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -87,12 +85,12 @@ function Login() {
               </div>
               <button
                 type="submit"
-                onClick={() => sendConnexion}
                 className="button text-2xl font-semibold text-main-green w-full hover:text-white border-2 border-main-green hover:bg-main-green hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Se connecter
               </button>
             </form>
+            <div>{errorMessage}</div>
           </div>
         </div>
       </div>

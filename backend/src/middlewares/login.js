@@ -3,8 +3,6 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
-const { JWT_SECRET } = process.env;
-
 const hashingOptions = {
   type: argon2.argon2id,
   memoryCost: 2 ** 16,
@@ -34,7 +32,7 @@ const verifyPassword = (req, res) => {
       if (isVerified) {
         const payload = { sub: req.administrator.id };
 
-        const token = jwt.sign(payload, JWT_SECRET, {
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
           algorithm: "HS512",
           expiresIn: "12h",
         });
@@ -53,19 +51,19 @@ const verifyPassword = (req, res) => {
 
 const verifyToken = (req, res, next) => {
   try {
-    const authorizationHeader = req.get("Authorization");
+    const authorization = req.get("Authorization");
 
-    if (authorizationHeader == null) {
+    if (authorization == null) {
       throw new Error("Authorization header is missing");
     }
 
-    const [type, token] = authorizationHeader.split(" ");
+    const [type, token] = authorization.split(" ");
 
     if (type !== "Bearer") {
       throw new Error("Authorization header has not the 'Bearer' type");
     }
 
-    req.payload = jwt.verify(token, JWT_SECRET);
+    req.payload = jwt.verify(token, process.env.JWT_SECRET);
 
     next();
   } catch (err) {
