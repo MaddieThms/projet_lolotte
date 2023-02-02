@@ -23,7 +23,7 @@ function Footer() {
           Contact
         </p>
         {token ? (
-          <NavLink to="/edit/grimpeurs">
+          <NavLink to="/admin/grimpeurs">
             <p className="flex flex-row">
               <img
                 src={login}

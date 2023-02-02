@@ -6,9 +6,11 @@ import "./index.css";
 import Navbar from "./components/Navbar";
 import Climbers from "./pages/Climbers";
 import Login from "./pages/Admin/Login";
-import EditClimbers from "./pages/Admin/EditClimbers";
+import EditClimbers from "./pages/Admin/AdminClimbers";
 import Footer from "./components/Footer";
 import { useCurrentAdminContext } from "./context/AdminContext";
+import CreateClimber from "./pages/Admin/CreateClimber";
+import EditClimber from "./pages/Admin/EditClimber";
 
 function App() {
   const { token } = useCurrentAdminContext();
@@ -21,7 +23,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/grimpeurs" element={<Climbers />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/edit/grimpeurs" element={<EditClimbers />} />
+          <Route path="/admin/grimpeurs" element={<EditClimbers />} />
+          <Route path="/admin/grimpeurs/:id" element={<EditClimber />} />
+          <Route path="/admin/creation/grimpeur" element={<CreateClimber />} />
         </Routes>
       ) : (
         <Routes>

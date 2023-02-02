@@ -31,8 +31,6 @@ const read = (req, res) => {
 const edit = (req, res) => {
   const climber = req.body;
 
-  // TODO validations (length, format...)
-
   climber.id = parseInt(req.params.id, 10);
 
   models.climber
@@ -52,8 +50,6 @@ const edit = (req, res) => {
 
 const add = (req, res) => {
   const climber = req.body;
-
-  // TODO validations (length, format...)
 
   models.climber
     .insert(climber)
@@ -82,10 +78,27 @@ const destroy = (req, res) => {
     });
 };
 
+const updatePicture = (req, res) => {
+  const id = req.payload.sub;
+  const { picture } = req;
+
+  models.climber
+    .updatePicture(id, picture)
+    .then(([result]) => {
+      if (result.affectedRows === 0) res.sendStatus(404);
+      else res.status(202).send({ picture });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  updatePicture,
 };

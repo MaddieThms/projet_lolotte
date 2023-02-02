@@ -21,11 +21,10 @@ CREATE TABLE climber (
   genre varchar(45) NOT NULL,
   country varchar(100),
   picture varchar(255),
-  avatar varchar(255),
-  date_creation DATETIME NOT NULL DEFAULT NOW() 
+  avatar varchar(255)
 );
 
-INSERT INTO climber (firstname, lastname, age, genre, country, picture, avatar, date_creation) VALUES ('Adam', 'Ondra', '29', "Man", "Cesky Horolezecky Svaz", 'adam_ondra.jpg','avatar_adam_ondra.jpg', '2022-10-13 12:12:23'),('Akiyo', 'Noguchi', "32", "Woman", "Japan", 'adam_ondra.jpg','avatar_adam_ondra.jpg', '2022-10-13 12:12:23');
+INSERT INTO climber (firstname, lastname, age, genre, country, picture, avatar) VALUES ('Adam', 'Ondra', '29', "Man", "Cesky Horolezecky Svaz", '86caf5db-9290-4b94-bfe5-37ee901c75d3-adam_ondra.jpg','avatar_adam_ondra.jpg'),('Akiyo', 'Noguchi', "33", "Woman", "Japan", '95fd356c-fcb5-4283-a58e-4d2d9edf13b7-akiyo_noguchi.jpg','avatar_adam_ondra.jpg');
 
 
 DROP TABLE IF EXISTS practice;
