@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useCurrentAdminContext } from "../../context/AdminContext";
 
 function EditClimber() {
   const [currentClimber, setCurrentClimber] = useState();
   const [updateClimbers, setUpdateClimbers] = useState(false);
-  const pictureRef = useRef(null);
+  // const pictureRef = useRef(null);
   const [newFirstname, setFirstname] = useState(currentClimber?.firstname);
   const [newLastname, setLastname] = useState(currentClimber?.lastname);
   const [newAge, setAge] = useState(currentClimber?.age);
@@ -17,10 +17,10 @@ function EditClimber() {
   const idParam = useParams();
   const { token } = useCurrentAdminContext();
 
-  const notifySuccessPicture = () =>
-    toast.success("Votre photo a bien été envoyée !");
-  const notifyErrorPicture = () =>
-    toast.error("Une erreur est survenue, veuillez recommencer");
+  // const notifySuccessPicture = () =>
+  //   toast.success("Votre photo a bien été envoyée !");
+  // const notifyErrorPicture = () =>
+  //   toast.error("Une erreur est survenue, veuillez recommencer");
 
   const handleGenreFemme = () => {
     setGenre("Femme");
@@ -90,38 +90,38 @@ function EditClimber() {
       .catch((error) => console.warn("error", error));
   }
 
-  const pictureSubmit = (e) => {
-    e.preventDefault();
-    if (pictureRef.current.files[0]) {
-      const myHeader = new Headers();
-      myHeader.append("Authorization", `Bearer ${token}`);
+  // const pictureSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (pictureRef.current.files[0]) {
+  //     const myHeader = new Headers();
+  //     myHeader.append("Authorization", `Bearer ${token}`);
 
-      const formData = new FormData();
-      formData.append("picture", pictureRef.current.files[0]);
+  //     const formData = new FormData();
+  //     formData.append("picture", pictureRef.current.files[0]);
 
-      const requestOptions = {
-        method: "PUT",
-        headers: myHeader,
-        body: formData,
-      };
-      fetch(
-        `http://localhost:5000/climbers/${idParam.id}/picture`,
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((results) => {
-          setCurrentClimber({ ...currentClimber, picture: results.picture });
-          updateClimber();
-          notifySuccessPicture();
-        })
-        .catch((error) => {
-          notifyErrorPicture();
-          console.error(error);
-        });
-    } else {
-      notifyErrorPicture();
-    }
-  };
+  //     const requestOptions = {
+  //       method: "PUT",
+  //       headers: myHeader,
+  //       body: formData,
+  //     };
+  //     fetch(
+  //       `http://localhost:5000/climbers/${idParam.id}/picture`,
+  //       requestOptions
+  //     )
+  //       .then((response) => response.json())
+  //       .then((results) => {
+  //         setCurrentClimber({ ...currentClimber, picture: results.picture });
+  //         updateClimber();
+  //         notifySuccessPicture();
+  //       })
+  //       .catch((error) => {
+  //         notifyErrorPicture();
+  //         console.error(error);
+  //       });
+  //   } else {
+  //     notifyErrorPicture();
+  //   }
+  // };
 
   const handleUpdateClimber = async () => {
     updateClimber();
@@ -140,19 +140,6 @@ function EditClimber() {
             alt="aperçu du grimpeur"
             className="rounded-full w-[170px] h-[170px] object-cover"
           />
-          <form
-            encType="multipart/form-data"
-            onSubmit={pictureSubmit}
-            className="mt-4 font-sans flex flex-col "
-          >
-            <input type="file" ref={pictureRef} className="text-sm h-8" />
-            <button
-              type="submit"
-              className="button border-2 border-main-green text-main-green font-medium  rounded-lg w-32 my-2 h-8"
-            >
-              Valider
-            </button>
-          </form>
         </div>
         <div className="flex flex-row gap-10">
           <div className="flex flex-col gap-4">

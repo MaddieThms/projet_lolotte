@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import { useCurrentAdminContext } from "./context/AdminContext";
 import CreateClimber from "./pages/Admin/CreateClimber";
 import EditClimber from "./pages/Admin/EditClimber";
+import ClimberDetails from "./pages/ClimberDetails";
 
 function App() {
   const { token } = useCurrentAdminContext();
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/grimpeurs" element={<Climbers />} />
+          <Route path="/grimpeurs/:id" element={<ClimberDetails />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       )}
