@@ -15,6 +15,9 @@ module.exports = {
       "sm-max": { max: "639px" },
     },
     extend: {
+      backgroundImage: {
+        "climbing-wall": "url('/assets/climbing-wall.svg')",
+      },
       colors: {
         "main-green": "#04d98b",
         "main-grey": "#8F8F8F",

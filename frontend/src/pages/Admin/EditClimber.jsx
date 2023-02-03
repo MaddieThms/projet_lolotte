@@ -130,19 +130,19 @@ function EditClimber() {
   return (
     <div className="flex flex-col items-center">
       <Toaster position="top-center" reverseOrder={false} />
-      <h1>
+      <h1 className="text-3xl mt-10 md:text-6xl md:mt-4">
         Editer ce <span className="text-main-green">grimpeur</span>
       </h1>
-      <div className="flex flex-row my-20 justify-around items-end">
-        <div className="mr-20 flex flex-col ">
+      <div className="flex flex-col md:flex-row my-20 justify-around items-center md:items-end">
+        <div className="md:mr-20 flex flex-col ">
           <img
             src={`http://localhost:5000/picture/${newPicture}`}
             alt="aperçu du grimpeur"
             className="rounded-full w-[170px] h-[170px] object-cover"
           />
         </div>
-        <div className="flex flex-row gap-10">
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-row gap-10 mt-10 md:mt-0">
+          <div className="flex flex-col gap-4 items-center md:items-start">
             <input
               className="peer h-8 w-36 rounded-lg border-2 border-main-green bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
               placeholder={newFirstname}
@@ -169,11 +169,11 @@ function EditClimber() {
             </div>
           </div>
           <div className="flex flex-col">
-            <div className="grid grid-cols-3 grid-flow-rows">
+            <div className="grid grid-cols-1 md:grid-cols-3 grid-flow-rows">
               <Checkbox label="Voie" ripple />
               <Checkbox label="Bloc" ripple />
             </div>
-            <div className="grid grid-cols-3 grid-flow-rows">
+            <div className="grid grid-cols-1 md:grid-cols-3 grid-flow-rows">
               <Checkbox label="Résine" ripple />
               <Checkbox label="Outdoor" ripple />
             </div>
