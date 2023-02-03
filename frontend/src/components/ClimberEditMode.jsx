@@ -65,7 +65,7 @@ function ClimberEditMode({ climber, toggleUpdateClimber }) {
 
         <div className="w-16 border-b border-main-green mb-6" />
 
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center items-center">
           <NavLink
             to={`/admin/grimpeurs/${climber.id}`}
             className="text-main-green"
