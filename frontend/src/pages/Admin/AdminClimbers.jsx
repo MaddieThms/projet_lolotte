@@ -44,7 +44,7 @@ function EditClimbers() {
         </div>
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 grid-flow-rows my-10">
-        {climbers?.map((climber) => (
+        {climbers?.slice(1, climbers.length).map((climber) => (
           <ClimberEditMode
             key={climber.id}
             climber={climber}

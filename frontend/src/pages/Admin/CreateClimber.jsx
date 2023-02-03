@@ -104,9 +104,9 @@ function CreateClimber() {
         return response.json();
       })
       .then((newClimber) => {
-        toggleUpdateClimber();
         setClimbers(...climbers, newClimber);
         navigate("/admin/grimpeurs");
+        toggleUpdateClimber();
       })
 
       .catch((error) => console.warn("error", error));

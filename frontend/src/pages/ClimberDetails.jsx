@@ -20,21 +20,21 @@ function ClimberDetails() {
       .catch((error) => console.warn("error", error));
   }, []);
   return (
-    <div className="flex flex-col items-center">
-      <h1>
+    <div className="flex flex-col items-center ">
+      <h1 className="text-3xl mt-10 md:text-6xl md:mt-4">
         A propos de
-        <span className="text-main-green"> {currentClimber?.firstname}</span>
+        <span className="text-main-green "> {currentClimber?.firstname}</span>
       </h1>
-      <div className="flex flex-row my-40 justify-around items-end">
-        <div className="mr-20 flex flex-col ">
+      <div className="flex flex-col md:flex-row my-20 md:my-40 justify-center md:justify-around items-center md:items-end">
+        <div className="md:mr-20 flex flex-col ">
           <img
             src={`http://localhost:5000/picture/${currentClimber?.picture}`}
             alt={`${currentClimber?.firstname} ${currentClimber?.lastname}`}
             className="rounded-full w-[170px] h-[170px] object-cover"
           />
         </div>
-        <div className="flex flex-row gap-10">
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-row gap-10 mt-10 md:mt-0">
+          <div className="flex flex-col gap-4 items-center md:items-start">
             <h3>{currentClimber?.firstname}</h3>
             <h3>{currentClimber?.lastname}</h3>
             <h3>{currentClimber?.age}</h3>
