@@ -11,11 +11,11 @@ function Home() {
           La grimpe en <span className="text-main-green">stats</span>
         </h1>
         <p className="mt-10 md:w-3/4">
-          Un tout nouveau projet lancé par Kayoo Escalade rassemblant toutes les
-          données sur la grimpe. La première version que vous pouvez voir
-          présente des grimpeurs de différentes pratiques à travers le monde. A
-          venir : un résumé de toutes les compétitions et une carte référençant
-          les voies les plus célèbres en extérieur.
+          Projet lancé par Kayoo Escalade rassemblant les données du monde de la
+          grimpe. Cette première version présente les grimpeurs des différentes
+          pratiques à travers le monde. A venir : un résumé de toutes les
+          compétitions et une carte référençant les voies les plus célèbres en
+          extérieur.
         </p>
       </div>
       <div className="w-max-screen overflow-x-hidden  ">
