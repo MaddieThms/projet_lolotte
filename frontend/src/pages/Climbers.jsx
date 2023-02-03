@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Climber from "../components/Climber";
 import climbersHeader from "../assets/grimpeurs_escalade_libre.svg";
-import FilterBar from "../components/FilterBar";
 
 function Climbers() {
   const [climbers, setClimbers] = useState();
@@ -16,7 +15,6 @@ function Climbers() {
     fetch(`http://localhost:5000/climbers`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.warn(result);
         setClimbers(result);
       })
       .catch((error) => console.warn("error", error));
@@ -30,7 +28,6 @@ function Climbers() {
           alt="grimpeurs emblématiques"
           className="md:w-3/5"
         />
-        <FilterBar />
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 grid-flow-rows my-10">
         {climbers?.map((climber) => (

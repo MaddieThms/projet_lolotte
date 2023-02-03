@@ -39,7 +39,6 @@ function EditClimber() {
     fetch(`http://localhost:5000/climbers/${idParam.id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.warn("data", result);
         setFirstname(result.firstname);
         setLastname(result.lastname);
         setAge(result.age);
@@ -66,7 +65,6 @@ function EditClimber() {
       country: newCountry,
       picture: newPicture,
     });
-    console.warn("body", raw);
 
     const requestOptions = {
       headers: myHeader,
@@ -78,7 +76,6 @@ function EditClimber() {
     fetch(`http://localhost:5000/climbers/${idParam.id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.warn("dt", result?.firstname);
         setCurrentClimber({
           ...currentClimber,
           firstname: result?.firstname,
@@ -113,7 +110,6 @@ function EditClimber() {
       )
         .then((response) => response.json())
         .then((results) => {
-          console.warn("results", results.picture);
           setCurrentClimber({ ...currentClimber, picture: results.picture });
           updateClimber();
           notifySuccessPicture();

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import FilterBar from "../../components/FilterBar";
 import ClimberEditMode from "../../components/ClimberEditMode";
 import editPierre from "../../assets/pierreEdit.png";
 import SearchBar from "../../components/SearchBar";
@@ -21,7 +20,6 @@ function EditClimbers() {
     fetch(`http://localhost:5000/climbers`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.warn(result);
         setClimbers(result);
       })
       .catch((error) => console.warn("error", error));
@@ -44,8 +42,6 @@ function EditClimbers() {
           </NavLink>
           <SearchBar />
         </div>
-
-        <FilterBar />
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 grid-flow-rows my-10">
         {climbers?.map((climber) => (

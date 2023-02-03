@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Checkbox } from "@material-tailwind/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useCurrentAdminContext } from "../../context/AdminContext";
@@ -14,6 +15,7 @@ function CreateClimber() {
   const [valueCountry, setValueCountry] = useState("");
   const [valuePicture, setValuePicture] = useState("");
   const [updateClimbers, setUpdateClimbers] = useState(false);
+  const navigate = useNavigate();
 
   const { token } = useCurrentAdminContext();
 
@@ -38,7 +40,6 @@ function CreateClimber() {
     fetch(`http://localhost:5000/climbers`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.warn(result);
         setClimbers(result);
       })
       .catch((error) => console.warn("error", error));
@@ -67,7 +68,6 @@ function CreateClimber() {
       )
         .then((response) => response.json())
         .then((results) => {
-          console.warn("results", results.picture);
           setValuePicture(results.picture);
           notifySuccessPicture();
         })
@@ -104,9 +104,9 @@ function CreateClimber() {
         return response.json();
       })
       .then((newClimber) => {
-        console.warn(newClimber);
         toggleUpdateClimber();
         setClimbers(...climbers, newClimber);
+        navigate("/admin/grimpeurs");
       })
 
       .catch((error) => console.warn("error", error));

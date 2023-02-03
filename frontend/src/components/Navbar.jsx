@@ -28,12 +28,21 @@ function Navbar() {
 
   return (
     <div className="flex justify-between px-6 md:px-14 py-4">
-      {/* logo */}
-      <NavLink to="/">
-        <h2 className="text-main-black">
-          projet <span className="text-main-green">.</span>lolotte
-        </h2>
-      </NavLink>
+      <div className="flex flex-col items-start">
+        {/* logo */}
+        <NavLink to="/">
+          <h2 className="text-main-black">
+            projet <span className="text-main-green">.</span>lolotte
+          </h2>
+        </NavLink>
+        {token ? (
+          <button type="button" onClick={() => handleLogOut()}>
+            Se déconnecter
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
 
       <div className="flex flex-row">
         {/* menu burger */}
@@ -127,13 +136,6 @@ function Navbar() {
                 <span className="text-main-green">.</span>les croix
               </li>
             </Tooltip>
-            {token ? (
-              <button type="button" onClick={() => handleLogOut()}>
-                Se déconnecter
-              </button>
-            ) : (
-              ""
-            )}
           </div>
         </ul>
       </div>
