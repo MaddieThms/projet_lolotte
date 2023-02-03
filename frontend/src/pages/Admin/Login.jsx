@@ -28,7 +28,7 @@ function Login() {
         .then((result) => {
           setAdmin(result.admin);
           setToken(result.token);
-          navigate("/edit/grimpeurs");
+          navigate("/admin/grimpeurs");
         })
         .catch((error) => console.warn(error));
     } else {
